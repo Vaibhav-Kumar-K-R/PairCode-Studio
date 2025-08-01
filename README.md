@@ -30,7 +30,7 @@ Whether you're pair programming, teaching, debugging with teammates, or conducti
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/paircode-studio.git
+git clone https://github.com/Vaibhav-Kumar-K-/paircode-studio.git
 cd paircode-studio
 
 # Install dependencies for both frontend and backend
@@ -38,5 +38,5 @@ cd client && npm install
 cd ../server && npm install
 
 # Run the development servers
-cd ../client && npm run dev
-cd ../server && npm run dev
+cd ../backend && npm run dev
+cd ../frontend && npm run dev
