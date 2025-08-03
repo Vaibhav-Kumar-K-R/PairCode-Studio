@@ -261,8 +261,10 @@ io.on("connection", (socket) => {
 const PORT =  3000
 
 app.get("/", (req: Request, res: Response) => {
-	// Send the index.html file
-	res.sendFile(path.join(__dirname, "..", "public", "index.html"))
+	return res.json({
+		message:"Server is fine!!",
+		status:"healthy"
+	})
 })
 
 server.listen(PORT, () => {
