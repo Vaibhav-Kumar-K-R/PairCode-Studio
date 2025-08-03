@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 import { Server } from "socket.io"
 import express, { Response, Request } from "express"
 import { SocketEvent, SocketId } from "./types/socket"
-
+import { USER_CONNECTION_STATUS, User } from "./types/user"
 
 dotenv.config()
 
