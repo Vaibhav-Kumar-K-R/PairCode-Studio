@@ -234,36 +234,14 @@ io.on("connection", (socket) => {
 		const roomId = user.roomId
 		socket.broadcast.to(roomId).emit(SocketEvent.TYPING_PAUSE, { user })
 	})
-
-	socket.on(SocketEvent.REQUEST_DRAWING, () => {
-		const roomId = getRoomId(socket.id)
-		if (!roomId) return
-		socket.broadcast
-			.to(roomId)
-			.emit(SocketEvent.REQUEST_DRAWING, { socketId: socket.id })
-	})
-
-	socket.on(SocketEvent.SYNC_DRAWING, ({ drawingData, socketId }) => {
-		socket.broadcast
-			.to(socketId)
-			.emit(SocketEvent.SYNC_DRAWING, { drawingData })
-	})
-
-	socket.on(SocketEvent.DRAWING_UPDATE, ({ snapshot }) => {
-		const roomId = getRoomId(socket.id)
-		if (!roomId) return
-		socket.broadcast.to(roomId).emit(SocketEvent.DRAWING_UPDATE, {
-			snapshot,
-		})
-	})
 })
 
-const PORT =  3000
+const PORT = process.env.PORT || 3000
 
 app.get("/", (req: Request, res: Response) => {
 	return res.json({
 		message:"Server is fine!!",
-		status:"healthy"
+		status:"200"
 	})
 })
 
