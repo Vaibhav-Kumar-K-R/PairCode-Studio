@@ -6,11 +6,11 @@ enum USER_CONNECTION_STATUS {
 interface User {
 	username: string
 	roomId: string
+	socketId: string
 	status: USER_CONNECTION_STATUS
-	cursorPosition: number
 	typing: boolean
 	currentFile: string | null
-	socketId: string
+	cursorPosition: number
 }
 
 export { USER_CONNECTION_STATUS, User }
