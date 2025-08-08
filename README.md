@@ -16,7 +16,7 @@ Whether you're pair programming, teaching, debugging with teammates, or conducti
 - 👥 **Multiple Participants** — Invite others via a shareable link.
 - 🔒 **Session Privacy** — Unique rooms for each session; private and secure.
 - 🛠️ **Built with:**
-  - React, Node.js, WebSocket, Express, CodeMirror / Monaco Editor, and Socket.IO.
+  - React, Node.js, WebSocket, Express, CodeMirror and Socket.IO.
 
 ---
 
