@@ -34,8 +34,8 @@ git clone https://github.com/Vaibhav-Kumar-K-R/PairCode-Studio.git
 cd PairCode-Studio
 
 # Install dependencies for both frontend and backend
-cd client && npm install
-cd ../server && npm install
+cd ../frontend && npm install
+cd ../backend && npm install
 
 # Run the development servers
 cd ../backend && npm run dev
