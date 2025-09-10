@@ -30,7 +30,7 @@ function EditorPage() {
                 state: { roomId },
             })
         } else if (roomId) {
-            const user: User = { username, roomId }
+            const user: User = { username, roomId,isAdmin:currentUser.isAdmin }
             setCurrentUser(user)
             socket.emit(SocketEvent.JOIN_REQUEST, user)
         }
@@ -49,7 +49,7 @@ function EditorPage() {
 
     return (
         <SplitterComponent>
-            <Sidebar />
+            <Sidebar/>
             <WorkSpace/>
         </SplitterComponent>
     )
