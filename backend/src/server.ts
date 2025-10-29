@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
 			io.to(socket.id).emit(SocketEvent.USERNAME_EXISTS)
 			return
 		}
-
+		
 		const user = {
 			username,
 			roomId,

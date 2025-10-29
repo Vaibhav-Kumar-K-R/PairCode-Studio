@@ -4,7 +4,7 @@ type SocketId = string
 
 enum SocketEvent {
 	JOIN_REQUEST = "join-request",
-	JOIN_ACCEPTED = "join-accepted",
+	JOIN_ACCEPTED = "join-accepted", 
 	USER_JOINED = "user-joined",
 	USER_DISCONNECTED = "user-disconnected",
 	SYNC_FILE_STRUCTURE = "sync-file-structure",
@@ -23,6 +23,7 @@ enum SocketEvent {
 	TYPING_START = "typing-start",
 	TYPING_PAUSE = "typing-pause",
 	USERNAME_EXISTS = "username-exists",
+	REQUEST_PENDING="request-pending"
 }
 
 interface SocketContext {
