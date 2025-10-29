@@ -3,9 +3,9 @@ import Toast from "./components/toast/Toast"
 import EditorPage from "./pages/EditorPage"
 import HomePage from "./pages/HomePage"
 import WaitingRoom from "./pages/RoomWaitingPage"
-import {useEffect,useState} from "react"
+
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  
 
 
     return (

@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import { useSocket } from "@/context/SocketContext"; // adjust connection URL as needed
-
+//@ts-ignore
 interface WaitingRoomProps {
   roomId: string;
   userName: string;
