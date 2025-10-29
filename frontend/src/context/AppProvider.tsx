@@ -18,7 +18,10 @@ function AppProvider({ children }: { children: ReactNode }) {
                             <CopilotContextProvider>
                                 <RunCodeContextProvider>
                                     <ChatContextProvider>
+                                      
+
                                         {children}
+                                       
                                     </ChatContextProvider>
                                 </RunCodeContextProvider>
                             </CopilotContextProvider>
