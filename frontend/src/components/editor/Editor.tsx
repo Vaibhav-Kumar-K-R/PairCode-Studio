@@ -4,6 +4,7 @@ import { useSettings } from "@/context/SettingContext"
 import { useSocket } from "@/context/SocketContext"
 import usePageEvents from "@/hooks/usePageEvents"
 import useResponsive from "@/hooks/useResponsive"
+import { USER_STATUS } from "@/types/user"
 import { editorThemes } from "@/resources/Themes"
 import { FileSystemItem } from "@/types/file"
 import { SocketEvent } from "@/types/socket"
@@ -15,15 +16,19 @@ import CodeMirror, {
     ViewUpdate,
     scrollPastEnd,
 } from "@uiw/react-codemirror"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useCallback } from "react"
 import toast from "react-hot-toast"
 import { cursorTooltipBaseTheme, tooltipField } from "./tooltip"
+import { useNavigate } from "react-router-dom"
 
 function Editor() {
-    const { users, currentUser } = useAppContext()
+    const { users, currentUser, setCurrentUser, setStatus, setUsers } =
+        useAppContext()
     const { activeFile, setActiveFile } = useFileSystem()
     const { theme, language, fontSize } = useSettings()
     const { socket } = useSocket()
+    const navigate = useNavigate()
+
     const { viewHeight } = useResponsive()
     const [timeOut, setTimeOut] = useState(setTimeout(() => {}, 0))
     const filteredUsers = useMemo(
@@ -32,7 +37,32 @@ function Editor() {
     )
     const [extensions, setExtensions] = useState<Extension[]>([])
 
+    const handleNotifyWrite = useCallback(() => {
+        toast.success(`${currentUser.username} is allowed  to type`)
+        setCurrentUser({ ...currentUser, canWrite: true })
+    }, [setCurrentUser])
+
+    const handleUnNotifyWrite = useCallback(() => {
+        toast.success(`${currentUser.username} is not  allowed  to type`)
+        setCurrentUser({ ...currentUser, canWrite: false })
+    }, [setCurrentUser])
+
+    const handleUserKick = useCallback(async () => {
+        toast.success(`You have been kicked out by the admin!!`)
+
+        await setTimeout(() => {}, 3000)
+        socket.disconnect()
+        setStatus(USER_STATUS.DISCONNECTED)
+        navigate("/", {
+            replace: true,
+        })
+    }, [users, setUsers])
+
     const onCodeChange = (code: string, view: ViewUpdate) => {
+        if (!currentUser.canWrite) {
+            toast.error("You can't write !!!")
+            return
+        }
         if (!activeFile) return
 
         const file: FileSystemItem = { ...activeFile, content: code }
@@ -76,6 +106,16 @@ function Editor() {
         }
 
         setExtensions(extensions)
+
+        socket.on(SocketEvent.NOTIFY_WRITE, handleNotifyWrite)
+        socket.on(SocketEvent.NOTIFY_UNWRITE, handleUnNotifyWrite)
+        socket.on(SocketEvent.GOT_KICKED, handleUserKick)
+
+        return () => {
+            socket.off(SocketEvent.NOTIFY_WRITE)
+            socket.off(SocketEvent.NOTIFY_UNWRITE)
+            socket.off(SocketEvent.GOT_KICKED)
+        }
     }, [filteredUsers, language])
 
     return (
@@ -91,6 +131,7 @@ function Editor() {
                 height: viewHeight,
                 position: "relative",
             }}
+            readOnly={!currentUser.canWrite}
         />
     )
 }

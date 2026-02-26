@@ -3,7 +3,7 @@ import { useSocket } from "@/context/SocketContext"
 import useWindowDimensions from "@/hooks/useWindowDimensions"
 // import { SocketEvent } from "@/types/socket"
 import { useCallback, useEffect } from "react"
-import { HistoryEntry, RecordsDiff, TLRecord, Tldraw, useEditor } from "tldraw"
+import {RecordsDiff, TLRecord, Tldraw, useEditor } from "tldraw"
 
 function DrawingEditor() {
     const { isMobile } = useWindowDimensions()
@@ -26,9 +26,8 @@ function ReachEditor() {
     const { socket } = useSocket()
 
     const handleChangeEvent = useCallback(
-        (change: HistoryEntry<TLRecord>) => {
-            const snapshot = change.changes
-            console.log(snapshot)
+        () => {
+            // const snapshot = change.changes
             // Update the drawing data in the context
             setDrawingData(editor.store.getSnapshot())
             // Emit the snapshot to the server
