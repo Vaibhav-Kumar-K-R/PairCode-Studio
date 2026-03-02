@@ -1,8 +1,46 @@
-@import '@vscode/codicons/dist/codicon.css';
+@import "@vscode/codicons/dist/codicon.css";
 @import url("tldraw/tldraw.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.str-video {
+    background-color: #272a30;
+    color: #ffffff;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.str-video {
+    background-color: #272a30;
+    color: #ffffff;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+}
 
 @layer components {
     .view-title {
@@ -10,9 +48,8 @@
     }
 }
 
-i.codicon{
+i.codicon {
     font-size: 28px !important;
- 
 }
 
 body {
@@ -87,3 +124,38 @@ select {
     }
 }
 
+/* Container to keep everything organized */
+
+/* The tray holding the buttons */
+.control-tray {
+    bottom: 10px;
+    left: 50%;
+    display: flex;
+    gap: 12px;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+/* Target the SDK buttons specifically */
+.control-tray button {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    background-color: #333;
+    border: none;
+}
+
+.control-tray button:hover {
+    background-color: #444;
+}
+
+.str-video__reactions-menu {
+    padding: 10px;
+}
+
+.str-video__reactions-menu__button {
+    scale: 150%;
+    margin: 5px;
+}
