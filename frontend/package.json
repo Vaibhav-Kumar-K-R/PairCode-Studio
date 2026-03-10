@@ -1,16 +1,47 @@
 {
-    "name": "paircodestudio-client",
+    "name": "Code Pairstudio-client",
     "private": true,
     "version": "0.0.0",
+    "description": "A powerful real-time code editor built for seamless collaboration and enhanced productivity.",
+    "main": "electron.js",
     "type": "module",
+    "author": {
+        "name": "Code Pair Studio"
+    },
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview --host 0.0.0.0",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "start": "electron .",
+        "electron:build": "electron-builder"
+    },
+    "build": {
+        "appId": "com.codepairstudio.editor",
+        "productName": "Code Pair Studio ",
+        "files": [
+            "electron.js",
+            "dist/**/*",
+            "package.json"
+        ],
+        "directories": {
+            "output": "release"
+        },
+        "win": {
+            "target": "nsis",
+            "icon": "public/mainlogo.ico"
+        },
+        "mac": {
+            "target": "dmg"
+        },
+        "linux": {
+            "target": "AppImage"
+        }
     },
     "dependencies": {
+        "@google/genai": "^1.42.0",
+        "@stream-io/video-react-sdk": "^1.32.4",
         "@uiw/codemirror-extensions-color": "^4.21.21",
         "@uiw/codemirror-extensions-hyper-link": "^4.21.21",
         "@uiw/codemirror-extensions-langs": "^4.21.21",
@@ -22,6 +53,7 @@
         "codemirror": "^6.0.1",
         "core-js-pure": "^3.44.0",
         "file-saver": "^2.0.5",
+        "jsonwebtoken": "^9.0.3",
         "jszip": "^3.10.1",
         "lang-map": "^0.4.0",
         "react": "^18.2.0",
@@ -29,6 +61,7 @@
         "react-dom": "^18.2.0",
         "react-hot-toast": "^2.4.1",
         "react-icons": "^5.2.1",
+        "react-loader-spinner": "^8.0.2",
         "react-markdown": "^10.0.1",
         "react-router-dom": "^6.22.3",
         "react-split": "^2.0.14",
@@ -52,6 +85,8 @@
         "@typescript-eslint/parser": "^7.13.1",
         "@vitejs/plugin-react": "^4.3.4",
         "autoprefixer": "^10.4.17",
+        "electron": "^40.6.0",
+        "electron-builder": "^26.8.1",
         "eslint": "^8.57.0",
         "eslint-plugin-react": "^7.34.3",
         "eslint-plugin-react-hooks": "^4.6.2",
